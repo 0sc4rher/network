@@ -1,0 +1,6 @@
+---
+all:
+  children:
+    r-iosxr:
+      hosts:
+        router1 hname=sandbox-iosxr-1.cisco.com

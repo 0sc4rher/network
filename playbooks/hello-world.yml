@@ -1,0 +1,10 @@
+- name: Hello World
+  hosts: localhost
+  tasks:
+    - name: Hello Message
+      debug:
+        msg: "Hello World!!!"
+        
+    - name: Ansible version
+      debug:
+        msg: "Ansible version is  {{ ansible_version.full }}"
