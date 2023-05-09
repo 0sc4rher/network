@@ -8,3 +8,7 @@
     - name: Ansible version
       debug:
         msg: "Ansible version is  {{ ansible_version.full }}"
+    - name: directory
+      ansible.builtin.debug:
+        var: playbook_dir
+
