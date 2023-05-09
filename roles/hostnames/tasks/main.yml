@@ -1,0 +1,5 @@
+---
+- name: Change hostname
+  iosxr_config:
+    lines:
+      - hostname {{ newhostname }}
