@@ -1,0 +1,41 @@
+---
+- name: Configure IOS-XR devices
+  hosts: routers
+  gather_facts: no
+  # connection local instead of network_cli
+  connection: network_cli
+
+  tasks:
+    - name: collect facts from IOS-XR routers
+      iosxr_command: 
+        commands: "show running-config"
+      register: config
+
+    - name: ensure backup folder is created
+      file:
+        path: "{{ backup_root }}"
+        state: directory
+      run_once: yes
+
+    - name: ensure device rolder is created
+      file:
+        path: "{{ backup_root }}/{{ inventory_hostname }}"
+        state: directory
+
+    - name: get timestamp
+      command: date +%Y%m%d%s
+      register: timestamp
+
+    - name: get/copy backup
+      copy:
+        content: "{{ config.stdout[0] }}"
+        dest: "{{ backup_root }}/{{ inventory_hostname }}/running-config_{{ timestamp.stdout }}"
+
+  vars:
+    project_dir: "{{ playbook_dir }}/.."
+    backup_root: ./backups
+    cli:
+      host: "{{ ansible_host }}"
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_ssh_pass }}"
+
