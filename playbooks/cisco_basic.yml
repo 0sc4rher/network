@@ -1,0 +1,19 @@
+---
+- name: Configure IOS-XR devices
+  hosts: routers
+  gather_facts: no
+  # connection local instead of network_cli
+  connection: network_cli
+
+  tasks:
+    - name: collect facts from IOS-XR routers
+      iosxr_facts:
+        gather_subset:
+        - config
+      register: config
+
+  vars:
+    cli:
+      host: "{{ ansible_host }}"
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_ssh_pass }}"

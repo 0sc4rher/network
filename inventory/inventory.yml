@@ -1,6 +1,7 @@
----
-all:
-  children:
-    r-iosxr:
-      hosts:
-        router1 hname=sandbox-iosxr-1.cisco.com
+[routers]
+sandbox-iosxr-1.cisco.com ansible_host=sandbox-iosxr-1.cisco.com ansible_user=admin
+
+[routers:vars]
+ansible_ssh_pass=C1sco12345
+ansible_network_os=iosxr
+ansible_port=22
