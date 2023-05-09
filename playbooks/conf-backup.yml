@@ -23,7 +23,7 @@
         state: directory
 
     - name: get timestamp
-      command: date +%Y%m%d%s
+      command: date +%Y%m%d%H%M%S
       register: timestamp
 
     - name: get/copy backup
@@ -38,4 +38,3 @@
       host: "{{ ansible_host }}"
       username: "{{ ansible_user }}"
       password: "{{ ansible_ssh_pass }}"
-
